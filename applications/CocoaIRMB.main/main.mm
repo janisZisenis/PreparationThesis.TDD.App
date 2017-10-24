@@ -9,7 +9,6 @@
 #include <CrossViews/HierarchicModel/HierarchicModel.h>
 
 #include <IRMB/IRMBMatcherFactory/IRMBMatcherFactory.h>
-#include "CocoaFileFinder.h"
 #include "CocoaIRMBViewComponentFactory.h"
 #include "CocoaIRMBSolutionItemFactory.h"
 #include "CocoaIRMBPropertiesModelFactory.h"

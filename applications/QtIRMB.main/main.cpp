@@ -9,22 +9,15 @@
 #include <CrossViews/HierarchicModel/HierarchicModel.h>
 
 #include <IRMB/IRMBMatcherFactory/IRMBMatcherFactory.h>
-#include "QtFileFinder.h"
 #include "QtIRMBViewComponentFactory.h"
 #include "QtViews/QtViewMatcherFactory/QtViewMatcherFactory.h"
 #include "QtIRMBSolutionItemFactory.h"
 #include "QtIRMBPropertiesModelFactory.h"
 
-#include "IRMB/GridGenerator/Implementation/GridGeneratorImp.h"
-#include "QtGridGenerator.h"
-#include <CrossNative/CNComposer/CNNullComposer.h>
-#include <CrossNative/CNComponent/CNComposable/CNComposable.h>
-
 int main(int argc, char** argv) {
     SelectionModelImpPtr selectionModel = SelectionModelImp::getNewInstance();
     HierarchicModelPtr model = HierarchicModel::getNewInstance();
     CBCommandStackPtr commandStack = CBCommandStack::getNewInstance();
-
 
     QApplication a(argc, argv);
 
