@@ -39,6 +39,7 @@ int main(int argc, char** argv) {
                                                                                   irmbMatcherFactory->makeSTLFileParentTypeMatcher());
     CNComponentPtr gridGeneratorMenuEntry = componentFactory->makeGridGeneratorActionComponent(commandStack, model, selectionModel,
                                                                                                irmbMatcherFactory->makeGridGeneratorParentTypeMatcher());
+    CNComponentPtr evaluateMenu = componentFactory->makeEvaluateMenuComponent("Evaluate", "evaluate-menu", selectionModel);
 
     QtViewMatcherFactoryPtr viewMatcherFactory = QtViewMatcherFactory::getNewInstance();
 
@@ -55,6 +56,7 @@ int main(int argc, char** argv) {
     viewHierarchy->load(removeMenuEntry, viewMatcherFactory->makeTagMatcher("edit-menu"));
     viewHierarchy->load(stlMenuEntry, viewMatcherFactory->makeTagMatcher("add-menu"));
     viewHierarchy->load(gridGeneratorMenuEntry, viewMatcherFactory->makeTagMatcher("add-menu"));
+    viewHierarchy->load(evaluateMenu, viewMatcherFactory->makeMenuBarTypeMatcher());
 
     return a.exec();
 }
