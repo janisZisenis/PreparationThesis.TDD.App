@@ -1,7 +1,7 @@
 #ifndef QTIRMB_QTFILEFINDER_H
 #define QTIRMB_QTFILEFINDER_H
 
-#include "IRMB/STLFile/CreateComponentStrategy/FileFinder.h"
+#include <IRMB/STLFile/CreateComponentStrategy/FileFinder.h>
 
 
 class QtFileFinder;

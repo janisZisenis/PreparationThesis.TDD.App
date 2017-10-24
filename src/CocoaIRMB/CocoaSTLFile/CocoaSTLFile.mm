@@ -3,7 +3,7 @@
 #include <CocoaViews/NSViewBased/CocoaCentral/CocoaCentralVisitor.h>
 #include <IRMB/STLFile/Implementation/STLFileImp.h>
 #import <Cocoa/Cocoa.h>
-#import "NSVTKView.h"
+#import "CocoaIRMB/NSVTKView/NSVTKView.h"
 
 
 #include <vtkPolyData.h>

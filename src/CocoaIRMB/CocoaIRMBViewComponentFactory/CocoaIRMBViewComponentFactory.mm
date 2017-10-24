@@ -4,7 +4,7 @@
 #include <CrossViews/TransActions/AddAction/AddAction.h>
 #include <IRMB/GridGenerator/CreateComponentStrategy/CreateGridGeneratorComponentStrategy.h>
 #include <IRMB/STLFile/CreateComponentStrategy/CreateSTLFileComponentStrategy.h>
-#include "CocoaFileFinder.h"
+#include "CocoaIRMB/CocoaFileFinder/CocoaFileFinder.h"
 
 CocoaIRMBViewComponentFactoryPtr CocoaIRMBViewComponentFactory::getNewInstance() {
     return CocoaIRMBViewComponentFactoryPtr(new CocoaIRMBViewComponentFactory());

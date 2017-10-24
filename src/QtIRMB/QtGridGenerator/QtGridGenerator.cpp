@@ -1,11 +1,12 @@
-#include "CocoaGridGenerator.h"
+#include "QtGridGenerator.h"
 #include <CrossNative/CNAcceptor/CNAcceptorImp.h>
-#include <CocoaViews/NSViewBased/CocoaCentral/CocoaCentralVisitor.h>
-#include <IRMB/GridGenerator/GridGenerator.h>
-#import <Cocoa/Cocoa.h>
-#import "NSVTKView.h"
+#include <CrossNative/CNVisitor/CNVisitor.h>
+#include <QtViews/QWidgetBased/QtCentral/QtCentralVisitor.h>
 
-#include "GridGenerator/grid/kernel/Grid.h"
+#include <IRMB/GridGenerator/GridGenerator.h>
+#include <QWidget>
+#include "QVTKWidget.h"
+#include <GridGenerator/grid/kernel/Grid.h>
 
 #include <vtkDataSetMapper.h>
 #include <vtkActor.h>
@@ -19,18 +20,19 @@
 #include <vtkDoubleArray.h>
 #include <vtkProperty.h>
 
-CocoaGridGeneratorPtr CocoaGridGenerator::getNewInstance(GridGeneratorPtr gridGenerator) {
-    return CocoaGridGeneratorPtr(new CocoaGridGenerator(gridGenerator));
+QtGridGeneratorPtr QtGridGenerator::getNewInstance(GridGeneratorPtr gridGenerator) {
+    return QtGridGeneratorPtr(new QtGridGenerator(gridGenerator));
 }
 
-CocoaGridGenerator::~CocoaGridGenerator() {}
+QtGridGenerator::~QtGridGenerator() {
+    delete widget;
+}
 
-CocoaGridGenerator::CocoaGridGenerator(GridGeneratorPtr gridGenerator)
-        : acceptor(CNAcceptorImp<CocoaCentralVisitor, CocoaGridGenerator>::getNewInstance()),
-          gridGenerator(gridGenerator),
-          title(gridGenerator->getName()){
-    this->view = [[NSVTKView alloc] init];
-    [view initializeVTKSupport];
+QtGridGenerator::QtGridGenerator(GridGeneratorPtr gridGenerator)
+        : acceptor(CNAcceptorImp<QtCentralVisitor, QtCentral>::getNewInstance()),
+          widget(new QVTKWidget()),
+          gridGenerator(gridGenerator) {
+    widget->setWindowTitle(QString::fromStdString(gridGenerator->getName()));
 
     Grid* grid = gridGenerator->generateGrid();
 
@@ -59,25 +61,25 @@ CocoaGridGenerator::CocoaGridGenerator(GridGeneratorPtr gridGenerator)
     actor->SetMapper(mapper);
     actor->GetProperty()->SetPointSize(3);
 
-    [view getRenderer]->AddActor(actor);
-    [view getRenderer]->SetBackground(222./255, 222./255, 222./255);
+    vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
+    renderer->AddActor(actor);
+    renderer->SetBackground(222./255, 222./255, 222./255);
 
-    [view setNeedsDisplay:YES];
+    widget->GetRenderWindow()->AddRenderer(renderer);
 }
 
-void CocoaGridGenerator::accept(CNVisitorPtr visitor) {
+QWidget *QtGridGenerator::getQWidget() {
+    return widget;
+}
+
+std::string QtGridGenerator::getTitle() {
+    return widget->windowTitle().toStdString();
+}
+
+void QtGridGenerator::accept(CNVisitorPtr visitor) {
     acceptor->accept(visitor, me());
 }
 
-CocoaGridGeneratorPtr CocoaGridGenerator::me() {
+QtGridGeneratorPtr QtGridGenerator::me() {
     return this->shared_from_this();
 }
-
-NSView *CocoaGridGenerator::getNSView() {
-    return view;
-}
-
-std::string CocoaGridGenerator::getTitle() {
-    return title;
-}
-

@@ -1,7 +1,7 @@
 #ifndef COCOAIRMB_COCOASTLFILE_H
 #define COCOAIRMB_COCOASTLFILE_H
 
-#include "CocoaViews/NSViewBased/CocoaCentral/CocoaCentral.h"
+#include <CocoaViews/NSViewBased/CocoaCentral/CocoaCentral.h>
 
 class CNAcceptor;
 

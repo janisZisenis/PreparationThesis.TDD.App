@@ -1,7 +1,7 @@
 set(targetName CocoaIRMB.main)       #REQUIRED#
 
 set(linkDirectories "")
-set(libsToLink IRMB)
+set(libsToLink "CocoaIRMB")
 set(includeDirectories "${CMAKE_SOURCE_DIR}/src/")
 #glob files and save in MY_SRCS
 include(CMakePackage.cmake)

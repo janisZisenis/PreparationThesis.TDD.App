@@ -56,5 +56,10 @@ sharedLibs()
 
 add_subdirectory(applications/IRMB)
 
+add_subdirectory(applications/QtIRMB)
 add_subdirectory(applications/QtIRMB.main)
-add_subdirectory(applications/CocoaIRMB.main)
+
+if(APPLE)
+   add_subdirectory(applications/CocoaIRMB)
+   add_subdirectory(applications/CocoaIRMB.main)
+endif()

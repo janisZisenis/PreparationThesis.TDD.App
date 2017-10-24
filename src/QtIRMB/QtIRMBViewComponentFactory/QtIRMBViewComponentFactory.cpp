@@ -4,7 +4,7 @@
 #include <CrossViews/TransActions/AddAction/AddAction.h>
 #include <IRMB/GridGenerator/CreateComponentStrategy/CreateGridGeneratorComponentStrategy.h>
 #include <IRMB/STLFile/CreateComponentStrategy/CreateSTLFileComponentStrategy.h>
-#include "QtFileFinder.h"
+#include "QtIRMB/QtFileFinder/QtFileFinder.h"
 
 QtIRMBViewComponentFactoryPtr QtIRMBViewComponentFactory::getNewInstance() {
     return QtIRMBViewComponentFactoryPtr(new QtIRMBViewComponentFactory());

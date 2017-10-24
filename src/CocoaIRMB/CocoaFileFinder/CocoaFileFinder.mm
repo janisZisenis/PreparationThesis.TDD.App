@@ -19,7 +19,7 @@ bool CocoaFileFinder::findFile() {
     [panel setCanChooseFiles:YES];
     [panel setAllowsMultipleSelection:NO];
     [panel setCanChooseDirectories:NO];
-    [panel setDirectoryURL: [NSURL fileURLWithPath:@"/Users/Janis/Desktop/STL/"]];
+    [panel setDirectoryURL: [NSURL fileURLWithPath:@"/Users/Janis/Studienarbeit-Framework/STL"]];
 //    [panel setDirectoryURL:[NSURL fileURLWithPath:NSHomeDirectory()]];
 
     if ([panel runModal] == NSModalResponseOK) {

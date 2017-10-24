@@ -1,6 +1,6 @@
 #include "CocoaIRMBPropertiesModelFactory.h"
-#include "CocoaViews/NSViewBased/CocoaPropertiesExplorer/CocoaPropertiesItem.h"
-#include "CocoaViews/NSViewBased/CocoaPropertiesExplorer/CocoaPropertiesModel.h"
+#include <CocoaViews/NSViewBased/CocoaPropertiesExplorer/CocoaPropertiesItem.h>
+#include <CocoaViews/NSViewBased/CocoaPropertiesExplorer/CocoaPropertiesModel.h>
 #include <CrossNative/CNVisitor/CNVisitor.h>
 #include <IRMB/STLFile/STLFileVisitor.h>
 #include <IRMB/STLFile/STLFile.h>

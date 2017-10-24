@@ -1,7 +1,7 @@
 #ifndef COCOALVICE_COCOAFILEFINDER_H
 #define COCOALVICE_COCOAFILEFINDER_H
 
-#include "IRMB/STLFile/CreateComponentStrategy/FileFinder.h"
+#include <IRMB/STLFile/CreateComponentStrategy/FileFinder.h>
 
 class CocoaFileFinder;
 typedef std::shared_ptr<CocoaFileFinder> CocoaFileFinderPtr;

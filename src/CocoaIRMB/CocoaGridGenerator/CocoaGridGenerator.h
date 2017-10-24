@@ -1,7 +1,7 @@
 #ifndef COCOAIRMB_COCOAGRIDGENERATOR_H
 #define COCOAIRMB_COCOAGRIDGENERATOR_H
 
-#include "CocoaViews/NSViewBased/CocoaCentral/CocoaCentral.h"
+#include <CocoaViews/NSViewBased/CocoaCentral/CocoaCentral.h>
 
 class CNAcceptor;
 

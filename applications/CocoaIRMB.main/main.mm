@@ -8,11 +8,13 @@
 #include <CrossViews/SelectionModel/SelectionModelImp.h>
 #include <CrossViews/HierarchicModel/HierarchicModel.h>
 
+#include <CocoaViews/CocoaViewMatcherFactory/CocoaViewMatcherFactory.h>
+
 #include <IRMB/IRMBMatcherFactory/IRMBMatcherFactory.h>
-#include "CocoaIRMBViewComponentFactory.h"
-#include "CocoaIRMBSolutionItemFactory.h"
-#include "CocoaIRMBPropertiesModelFactory.h"
-#include "CocoaViews/CocoaViewMatcherFactory/CocoaViewMatcherFactory.h"
+
+#include <CocoaIRMB/CocoaIRMBViewComponentFactory/CocoaIRMBViewComponentFactory.h>
+#include <CocoaIRMB/CocoaIRMBSolutionItemFactory/CocoaIRMBSolutionItemFactory.h>
+#include <CocoaIRMB/CocoaIRMBPropertiesModelFactory/CocoaIRMBPropertiesModelFactory.h>
 
 int main(int argc, char** argv) {
     SelectionModelImpPtr selectionModel = SelectionModelImp::getNewInstance();

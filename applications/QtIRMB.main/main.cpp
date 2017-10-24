@@ -8,11 +8,13 @@
 #include <CrossViews/SelectionModel/SelectionModelImp.h>
 #include <CrossViews/HierarchicModel/HierarchicModel.h>
 
+#include <QtViews/QtViewMatcherFactory/QtViewMatcherFactory.h>
+
 #include <IRMB/IRMBMatcherFactory/IRMBMatcherFactory.h>
-#include "QtIRMBViewComponentFactory.h"
-#include "QtViews/QtViewMatcherFactory/QtViewMatcherFactory.h"
-#include "QtIRMBSolutionItemFactory.h"
-#include "QtIRMBPropertiesModelFactory.h"
+
+#include <QtIRMB/QtIRMBViewComponentFactory/QtIRMBViewComponentFactory.h>
+#include <QtIRMB/QtIRMBSolutionItemFactory/QtIRMBSolutionItemFactory.h>
+#include <QtIRMB/QtIRMBPropertiesModelFactory/QtIRMBPropertiesModelFactory.h>
 
 int main(int argc, char** argv) {
     SelectionModelImpPtr selectionModel = SelectionModelImp::getNewInstance();
