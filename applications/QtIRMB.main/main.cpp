@@ -21,7 +21,6 @@ int main(int argc, char** argv) {
     SelectionModelImpPtr selectionModel = SelectionModelImp::getNewInstance();
     HierarchicModelPtr model = HierarchicModel::getNewInstance();
     CBCommandStackPtr commandStack = CBCommandStack::getNewInstance();
-
     IRMBMatcherFactoryPtr irmbMatcherFactory = IRMBMatcherFactory::getNewInstance();
 
     QApplication a(argc, argv);

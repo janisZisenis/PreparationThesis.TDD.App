@@ -15,18 +15,25 @@
 #include <CocoaIRMB/CocoaIRMBViewComponentFactory/CocoaIRMBViewComponentFactory.h>
 #include <CocoaIRMB/CocoaIRMBSolutionItemFactory/CocoaIRMBSolutionItemFactory.h>
 #include <CocoaIRMB/CocoaIRMBPropertiesModelFactory/CocoaIRMBPropertiesModelFactory.h>
+#include <CocoaIRMB/CocoaIRMBMenuEntryListProvider/CocoaIRMBMenuEntryListProvider.h>
 
 int main(int argc, char** argv) {
     SelectionModelImpPtr selectionModel = SelectionModelImp::getNewInstance();
     HierarchicModelPtr model = HierarchicModel::getNewInstance();
     CBCommandStackPtr commandStack = CBCommandStack::getNewInstance();
-
+    IRMBMatcherFactoryPtr irmbMatcherFactory = IRMBMatcherFactory::getNewInstance();
 
     NSApplication* application = [NSApplication sharedApplication];
     [application activateIgnoringOtherApps:true];
+    
+    CNDynamicHierarchyPtr viewHierarchy = CNDynamicHierarchy::getNewInstance();
+    CocoaViewMatcherFactoryPtr viewMatcherFactory = CocoaViewMatcherFactory::getNewInstance();
 
-    IRMBMatcherFactoryPtr irmbMatcherFactory = IRMBMatcherFactory::getNewInstance();
     CocoaIRMBViewComponentFactoryPtr componentFactory = CocoaIRMBViewComponentFactory::getNewInstance();
+    CocoaIRMBMenuEntryListProviderPtr menuEntryListProvider = CocoaIRMBMenuEntryListProvider::getNewInstance(viewHierarchy,
+                                                                                                       viewMatcherFactory->makeShellTypeMatcher(),
+                                                                                                       selectionModel,
+                                                                                                       model);
 
     CNComponentPtr shell = componentFactory->makeShellComponent();
     CNComponentPtr menuBar = componentFactory->makeMenuBarComponent();
@@ -41,10 +48,8 @@ int main(int argc, char** argv) {
                                                                                   irmbMatcherFactory->makeSTLFileParentTypeMatcher());
     CNComponentPtr gridGeneratorMenuEntry = componentFactory->makeGridGeneratorActionComponent(commandStack, model, selectionModel,
                                                                                                irmbMatcherFactory->makeGridGeneratorParentTypeMatcher());
+    CNComponentPtr evaluateMenu = componentFactory->makeEvaluateMenuComponent("Evaluate", "evaluate-menu", selectionModel, menuEntryListProvider);
 
-    CocoaViewMatcherFactoryPtr viewMatcherFactory = CocoaViewMatcherFactory::getNewInstance();
-
-    CNDynamicHierarchyPtr viewHierarchy = CNDynamicHierarchy::getNewInstance();
     viewHierarchy->load(shell, viewMatcherFactory->makeTopLevelMatcher());
     viewHierarchy->load(solutionExplorer, viewMatcherFactory->makeShellTypeMatcher());
     viewHierarchy->load(propertiesExplorer, viewMatcherFactory->makeShellTypeMatcher());
@@ -57,6 +62,7 @@ int main(int argc, char** argv) {
     viewHierarchy->load(removeMenuEntry, viewMatcherFactory->makeTagMatcher("edit-menu"));
     viewHierarchy->load(stlMenuEntry, viewMatcherFactory->makeTagMatcher("add-menu"));
     viewHierarchy->load(gridGeneratorMenuEntry, viewMatcherFactory->makeTagMatcher("add-menu"));
+    viewHierarchy->load(evaluateMenu, viewMatcherFactory->makeMenuBarTypeMatcher());
 
     [application run];
     return 0;

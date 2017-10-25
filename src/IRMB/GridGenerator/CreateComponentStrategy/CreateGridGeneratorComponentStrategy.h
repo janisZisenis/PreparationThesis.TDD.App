@@ -6,15 +6,15 @@
 class GridGenerator;
 class CNComposer;
 
-class CreateQtGridGeneratorComponentStrategy;
-typedef std::shared_ptr<CreateQtGridGeneratorComponentStrategy> CreateGridGeneratorComponentStrategyPtr;
+class CreateGridGeneratorComponentStrategy;
+typedef std::shared_ptr<CreateGridGeneratorComponentStrategy> CreateGridGeneratorComponentStrategyPtr;
 
-class CreateQtGridGeneratorComponentStrategy : public CNCreateComponentStrategy {
+class CreateGridGeneratorComponentStrategy : public CNCreateComponentStrategy {
 public:
     static CreateGridGeneratorComponentStrategyPtr getNewInstance();
-    virtual ~CreateQtGridGeneratorComponentStrategy();
+    virtual ~CreateGridGeneratorComponentStrategy();
 private:
-    CreateQtGridGeneratorComponentStrategy();
+    CreateGridGeneratorComponentStrategy();
 
 public:
     virtual std::shared_ptr<CNComponent> createComponent() override;
