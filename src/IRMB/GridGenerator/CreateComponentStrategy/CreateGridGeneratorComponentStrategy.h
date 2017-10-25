@@ -1,20 +1,20 @@
 #ifndef IRMB_CREATEGRIDGENERATORSTRATEGY_H
 #define IRMB_CREATEGRIDGENERATORSTRATEGY_H
 
-#include <CrossViews/TransActions/AddAction/CreateComponentStrategy.h>
+#include <CrossNative/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
 
 class GridGenerator;
 class CNComposer;
 
-class CreateGridGeneratorComponentStrategy;
-typedef std::shared_ptr<CreateGridGeneratorComponentStrategy> CreateGridGeneratorComponentStrategyPtr;
+class CreateQtGridGeneratorComponentStrategy;
+typedef std::shared_ptr<CreateQtGridGeneratorComponentStrategy> CreateGridGeneratorComponentStrategyPtr;
 
-class CreateGridGeneratorComponentStrategy : public CreateComponentStrategy {
+class CreateQtGridGeneratorComponentStrategy : public CNCreateComponentStrategy {
 public:
     static CreateGridGeneratorComponentStrategyPtr getNewInstance();
-    virtual ~CreateGridGeneratorComponentStrategy();
+    virtual ~CreateQtGridGeneratorComponentStrategy();
 private:
-    CreateGridGeneratorComponentStrategy();
+    CreateQtGridGeneratorComponentStrategy();
 
 public:
     virtual std::shared_ptr<CNComponent> createComponent() override;

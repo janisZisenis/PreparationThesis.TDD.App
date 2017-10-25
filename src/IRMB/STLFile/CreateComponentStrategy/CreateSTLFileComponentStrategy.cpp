@@ -12,7 +12,7 @@ CreateSTLFileComponentStrategy::CreateSTLFileComponentStrategy(FileFinderPtr fil
 
 CNComponentPtr CreateSTLFileComponentStrategy::createComponent() {
     if(!fileFinder->findFile())
-        throw CreationCanceledException();
+        throw CNCreationCanceledException();
 
     STLFilePtr stlFile = STLFileImp::getNewInstance(fileFinder->getFileName());
     CNComposerPtr composer = CNNullComposer::getNewInstance();

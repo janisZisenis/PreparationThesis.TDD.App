@@ -5,13 +5,13 @@
 #include <CrossNative/CNComponent/CNComposable/CNComposable.h>
 #include <CrossNative/CNComposer/CNVisitingComposer/CNVisitingComposer.h>
 
-CreateGridGeneratorComponentStrategyPtr CreateGridGeneratorComponentStrategy::getNewInstance() {
-    return CreateGridGeneratorComponentStrategyPtr(new CreateGridGeneratorComponentStrategy());
+CreateGridGeneratorComponentStrategyPtr CreateQtGridGeneratorComponentStrategy::getNewInstance() {
+    return CreateGridGeneratorComponentStrategyPtr(new CreateQtGridGeneratorComponentStrategy());
 }
-CreateGridGeneratorComponentStrategy::~CreateGridGeneratorComponentStrategy() {}
-CreateGridGeneratorComponentStrategy::CreateGridGeneratorComponentStrategy() {}
+CreateQtGridGeneratorComponentStrategy::~CreateQtGridGeneratorComponentStrategy() {}
+CreateQtGridGeneratorComponentStrategy::CreateQtGridGeneratorComponentStrategy() {}
 
-CNComponentPtr CreateGridGeneratorComponentStrategy::createComponent() {
+CNComponentPtr CreateQtGridGeneratorComponentStrategy::createComponent() {
     static int i;
 
     GridGeneratorPtr gridGenerator = GridGeneratorImp::getNewInstance("MyFancyGridGenerator (" + std::to_string(i++) + ")", 10, 10, 10, 1, "D3Q7");

@@ -8,6 +8,7 @@ class AddingHierarchicModel;
 class SelectionModel;
 class CNMatcher;
 class FileFinder;
+class MenuEntryListProvider;
 
 class QtIRMBViewComponentFactory;
 typedef std::shared_ptr<QtIRMBViewComponentFactory> QtIRMBViewComponentFactoryPtr;
@@ -20,7 +21,8 @@ private:
     QtIRMBViewComponentFactory();
 
 public:
-    virtual std::shared_ptr<CNComponent> makeEvaluateMenuComponent(std::string title, std::string tag, std::shared_ptr<SelectionModel> selectionModel);
+    virtual std::shared_ptr<CNComponent> makeEvaluateMenuComponent(std::string title, std::string tag, std::shared_ptr<SelectionModel> selectionModel,
+                                                                   std::shared_ptr<MenuEntryListProvider> menuEntryListProvider);
 
     virtual std::shared_ptr<CNComponent> makeAddSTLFileActionComponent(std::shared_ptr<CBCommandInvoker> invoker,
                                                                        std::shared_ptr<AddingHierarchicModel> model,

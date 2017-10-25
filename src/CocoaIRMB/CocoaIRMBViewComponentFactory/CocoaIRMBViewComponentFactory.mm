@@ -2,7 +2,7 @@
 #include <CrossViews/MenuEntryPresenter/MenuEntryPresenter.h>
 
 #include <CrossViews/TransActions/AddAction/AddAction.h>
-#include <IRMB/GridGenerator/CreateComponentStrategy/CreateGridGeneratorComponentStrategy.h>
+#include <IRMB/GridGenerator/CreateComponentStrategy/CreateQtGridGeneratorComponentStrategy.h>
 #include <IRMB/STLFile/CreateComponentStrategy/CreateSTLFileComponentStrategy.h>
 #include "CocoaIRMB/CocoaFileFinder/CocoaFileFinder.h"
 
@@ -34,7 +34,7 @@ std::shared_ptr<CNComponent> CocoaIRMBViewComponentFactory::makeGridGeneratorAct
     std::shared_ptr<MenuEntryView> view = makeMenuEntryView();
     std::shared_ptr<CBTransActionAppearance> appearance = makeCBFixedTransActionAppearance(true, OFF, "Grid Generator");
     CBTransActionPtr action = AddAction::getNewInstance(invoker, model, selectionModel,
-                                                        CreateGridGeneratorComponentStrategy::getNewInstance(), matcher);
+                                                        CreateQtGridGeneratorComponentStrategy::getNewInstance(), matcher);
     std::shared_ptr<MenuEntryPresenter> presenter = makeMenuEntryPresenter(view, appearance, action);
     std::shared_ptr<CNComposer> composer = makeNullComposer();
 

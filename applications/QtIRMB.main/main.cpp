@@ -15,16 +15,24 @@
 #include <QtIRMB/QtIRMBViewComponentFactory/QtIRMBViewComponentFactory.h>
 #include <QtIRMB/QtIRMBSolutionItemFactory/QtIRMBSolutionItemFactory.h>
 #include <QtIRMB/QtIRMBPropertiesModelFactory/QtIRMBPropertiesModelFactory.h>
+#include <QtIRMB/QtIRMBMenuEntryListProvider/QtIRMBMenuEntryListProvider.h>
 
 int main(int argc, char** argv) {
     SelectionModelImpPtr selectionModel = SelectionModelImp::getNewInstance();
     HierarchicModelPtr model = HierarchicModel::getNewInstance();
     CBCommandStackPtr commandStack = CBCommandStack::getNewInstance();
 
-    QApplication a(argc, argv);
-
     IRMBMatcherFactoryPtr irmbMatcherFactory = IRMBMatcherFactory::getNewInstance();
+
+    QApplication a(argc, argv);
+    CNDynamicHierarchyPtr viewHierarchy = CNDynamicHierarchy::getNewInstance();
+    QtViewMatcherFactoryPtr viewMatcherFactory = QtViewMatcherFactory::getNewInstance();
+
     QtIRMBViewComponentFactoryPtr componentFactory = QtIRMBViewComponentFactory::getNewInstance();
+    QtIRMBMenuEntryListProviderPtr menuEntryListProvider = QtIRMBMenuEntryListProvider::getNewInstance(viewHierarchy,
+                                                                                                       viewMatcherFactory->makeShellTypeMatcher(),
+                                                                                                       selectionModel,
+                                                                                                       model);
 
     CNComponentPtr shell = componentFactory->makeShellComponent();
     CNComponentPtr menuBar = componentFactory->makeMenuBarComponent();
@@ -39,11 +47,9 @@ int main(int argc, char** argv) {
                                                                                   irmbMatcherFactory->makeSTLFileParentTypeMatcher());
     CNComponentPtr gridGeneratorMenuEntry = componentFactory->makeGridGeneratorActionComponent(commandStack, model, selectionModel,
                                                                                                irmbMatcherFactory->makeGridGeneratorParentTypeMatcher());
-    CNComponentPtr evaluateMenu = componentFactory->makeEvaluateMenuComponent("Evaluate", "evaluate-menu", selectionModel);
+    CNComponentPtr evaluateMenu = componentFactory->makeEvaluateMenuComponent("Evaluate", "evaluate-menu", selectionModel, menuEntryListProvider);
 
-    QtViewMatcherFactoryPtr viewMatcherFactory = QtViewMatcherFactory::getNewInstance();
 
-    CNDynamicHierarchyPtr viewHierarchy = CNDynamicHierarchy::getNewInstance();
     viewHierarchy->load(shell, viewMatcherFactory->makeTopLevelMatcher());
     viewHierarchy->load(solutionExplorer, viewMatcherFactory->makeShellTypeMatcher());
     viewHierarchy->load(propertiesExplorer, viewMatcherFactory->makeShellTypeMatcher());

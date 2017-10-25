@@ -13,6 +13,7 @@
 #include <QtViews/QActionBased/QtMenu/Visitors/QtMenuDecomposingVisitor.h>
 
 #include <CrossViews/SelectionModel/SelectionModel.h>
+#include "QtIRMB/QtIRMBMenuEntryListProvider/QtIRMBMenuEntryListProvider.h"
 
 QtIRMBViewComponentFactoryPtr QtIRMBViewComponentFactory::getNewInstance() {
     return QtIRMBViewComponentFactoryPtr(new QtIRMBViewComponentFactory());
@@ -41,19 +42,20 @@ std::shared_ptr<CNComponent> QtIRMBViewComponentFactory::makeGridGeneratorAction
                                                                                           std::shared_ptr<CNMatcher> matcher) {
     std::shared_ptr<QtAction> view = makeQtAction();
     std::shared_ptr<CBTransActionAppearance> appearance = makeCBFixedTransActionAppearance(true, OFF, "Grid Generator");
-    CBTransActionPtr action = AddAction::getNewInstance(invoker, model, selectionModel, CreateGridGeneratorComponentStrategy::getNewInstance(), matcher);
+    CBTransActionPtr action = AddAction::getNewInstance(invoker, model, selectionModel, CreateQtGridGeneratorComponentStrategy::getNewInstance(), matcher);
     std::shared_ptr<MenuEntryPresenter> presenter = makeMenuEntryPresenter(view, appearance, action);
     std::shared_ptr<CNComposer> composer = makeCNNullComposer();
 
     return makeCNComposable(presenter, composer);
 }
 
-std::shared_ptr<CNComponent> QtIRMBViewComponentFactory::makeEvaluateMenuComponent(std::string title, std::string tag, SelectionModelPtr selectionModel) {
+std::shared_ptr<CNComponent> QtIRMBViewComponentFactory::makeEvaluateMenuComponent(std::string title, std::string tag, SelectionModelPtr selectionModel,
+                                                                                   std::shared_ptr<MenuEntryListProvider> menuEntryListProvider) {
     std::shared_ptr<QtMenu> view = makeQtMenu(title, tag);
     std::shared_ptr<CNComposer> composer = makeCNVisitingComposer(QtMenuComposingVisitor::getNewInstance(view),
                                                                   QtMenuDecomposingVisitor::getNewInstance(view));
 
-    DynamicMenuPresenterPtr presenter = makeDynamicMenuPresenter(view, composer, nullptr);
+    DynamicMenuPresenterPtr presenter = makeDynamicMenuPresenter(view, composer, menuEntryListProvider);
     selectionModel->attach(presenter);
     return makeCNComposable(presenter, composer);
 }
