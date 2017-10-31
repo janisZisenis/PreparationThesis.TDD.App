@@ -49,7 +49,7 @@ std::shared_ptr<CNComponent> QtIRMBViewComponentFactory::makeGridGeneratorAction
 }
 
 std::shared_ptr<CNComponent> QtIRMBViewComponentFactory::makeEvaluateMenuComponent(std::string title, std::string tag, CNSelectionModelPtr selectionModel,
-                                                                                   std::shared_ptr<CNComponentListProvider> menuEntryListProvider) {
+                                                                                   std::shared_ptr<CNVisitableListProvider> menuEntryListProvider) {
     std::shared_ptr<QtMenu> view = makeQtMenu(title, tag);
     std::shared_ptr<CNComposer> composer = makeCNVisitingComposer(QtMenuComposingVisitor::getNewInstance(view),
                                                                   QtMenuDecomposingVisitor::getNewInstance(view));

@@ -72,7 +72,7 @@ QtIRMBMenuEntryListProvider::QtIRMBMenuEntryListProvider(std::shared_ptr<CNCompo
                                                          std::shared_ptr<CNHierarchicComponentAccess> modelAccess)
         : componentLoader(componentLoader), matcher(matcher), selectionModel(selectionModel), modelAccess(modelAccess) {}
 
-const std::vector<CNVisitablePtr> QtIRMBMenuEntryListProvider::getMenuEntryList() {
+const std::vector<CNVisitablePtr> QtIRMBMenuEntryListProvider::getVisitables() {
     if(!selectionModel->hasSelection())
         return std::vector<CNVisitablePtr>();
 

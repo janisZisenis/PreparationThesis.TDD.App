@@ -1,7 +1,7 @@
 #ifndef COCOAIRMB_COCOAIRMBMENUENTRYLISTPROVIDER_H
 #define COCOAIRMB_COCOAIRMBMENUENTRYLISTPROVIDER_H
 
-#include <CrossViews/CNDynamicMenuPresenter/CNComponentListProvider.h>
+#include <CrossViews/CNDynamicMenuPresenter/CNVisitableListProvider.h>
 
 class CNSelectionModel;
 class CNHierarchicComponentAccess;
@@ -11,7 +11,7 @@ class CNMatcher;
 class CocoaIRMBMenuEntryListProvider;
 typedef std::shared_ptr<CocoaIRMBMenuEntryListProvider> CocoaIRMBMenuEntryListProviderPtr;
 
-class CocoaIRMBMenuEntryListProvider : public CNComponentListProvider {
+class CocoaIRMBMenuEntryListProvider : public CNVisitableListProvider {
 public:
     static CocoaIRMBMenuEntryListProviderPtr getNewInstance(std::shared_ptr<CNComponentLoader> componentLoader,
                                                          std::shared_ptr<CNMatcher> matcher,
@@ -25,7 +25,7 @@ protected:
                                 std::shared_ptr<CNHierarchicComponentAccess> modelAccess);
 
 public:
-    const std::vector<std::shared_ptr<CNVisitable>> getMenuEntryList() override;
+    const std::vector<std::shared_ptr<CNVisitable> > getVisitables() override;
 
 private:
     std::shared_ptr<CNMatcher> matcher;

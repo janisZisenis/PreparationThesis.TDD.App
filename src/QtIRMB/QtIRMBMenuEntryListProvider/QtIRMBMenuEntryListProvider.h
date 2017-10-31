@@ -1,7 +1,7 @@
 #ifndef QTIRMB_QTIRMBMENUENTRYLISTPROVIDER_H
 #define QTIRMB_QTIRMBMENUENTRYLISTPROVIDER_H
 
-#include <CrossViews/CNDynamicMenuPresenter/CNComponentListProvider.h>
+#include <CrossViews/CNDynamicMenuPresenter/CNVisitableListProvider.h>
 
 class CNSelectionModel;
 class CNHierarchicComponentAccess;
@@ -11,7 +11,7 @@ class CNComponentLoader;
 class QtIRMBMenuEntryListProvider;
 typedef std::shared_ptr<QtIRMBMenuEntryListProvider> QtIRMBMenuEntryListProviderPtr;
 
-class QtIRMBMenuEntryListProvider : public CNComponentListProvider{
+class QtIRMBMenuEntryListProvider : public CNVisitableListProvider {
 public:
     static QtIRMBMenuEntryListProviderPtr getNewInstance(std::shared_ptr<CNComponentLoader> componentLoader,
                                                          std::shared_ptr<CNMatcher> matcher,
@@ -25,7 +25,7 @@ protected:
                                 std::shared_ptr<CNHierarchicComponentAccess> modelAccess);
 
 public:
-    const std::vector<std::shared_ptr<CNVisitable>> getMenuEntryList() override;
+    const std::vector<std::shared_ptr<CNVisitable>> getVisitables() override;
 
 private:
     std::shared_ptr<CNMatcher> matcher;

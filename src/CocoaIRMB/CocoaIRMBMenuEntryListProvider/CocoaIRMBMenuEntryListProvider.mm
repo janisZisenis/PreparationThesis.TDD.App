@@ -72,7 +72,7 @@ CocoaIRMBMenuEntryListProvider::CocoaIRMBMenuEntryListProvider(std::shared_ptr<C
                                                                std::shared_ptr<CNHierarchicComponentAccess> modelAccess)
         : componentLoader(componentLoader), matcher(matcher), selectionModel(selectionModel), modelAccess(modelAccess) {}
 
-const std::vector<CNVisitablePtr> CocoaIRMBMenuEntryListProvider::getMenuEntryList() {
+const std::vector<CNVisitablePtr> CocoaIRMBMenuEntryListProvider::getVisitables() {
     if(!selectionModel->hasSelection())
         return std::vector<CNVisitablePtr>();
 

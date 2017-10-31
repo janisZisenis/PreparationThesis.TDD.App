@@ -8,7 +8,7 @@ class CNComponentAdder;
 class CNSelectionModel;
 class CNMatcher;
 class FileFinder;
-class CNComponentListProvider;
+class CNVisitableListProvider;
 
 class CocoaIRMBViewComponentFactory;
 typedef std::shared_ptr<CocoaIRMBViewComponentFactory> CocoaIRMBViewComponentFactoryPtr;
@@ -22,7 +22,7 @@ private:
 
 public:
     virtual std::shared_ptr<CNComponent> makeEvaluateMenuComponent(std::string title, std::string tag, std::shared_ptr<CNSelectionModel> selectionModel,
-                                                                   std::shared_ptr<CNComponentListProvider> menuEntryListProvider);
+                                                                   std::shared_ptr<CNVisitableListProvider> menuEntryListProvider);
 
     virtual std::shared_ptr<CNComponent> makeAddSTLFileActionComponent(std::shared_ptr<CNCommandInvoker> invoker,
                                                                        std::shared_ptr<CNComponentAdder> model,

@@ -50,7 +50,7 @@ std::shared_ptr<CNComponent> CocoaIRMBViewComponentFactory::makeGridGeneratorAct
 
 std::shared_ptr<CNComponent> CocoaIRMBViewComponentFactory::makeEvaluateMenuComponent(std::string title, std::string tag,
                                                                                       std::shared_ptr<CNSelectionModel> selectionModel,
-                                                                                      std::shared_ptr<CNComponentListProvider> menuEntryListProvider) {
+                                                                                      std::shared_ptr<CNVisitableListProvider> menuEntryListProvider) {
     CocoaMenuPtr view = makeCocoaMenu(title, tag);
     std::shared_ptr<CNComposer> composer = makeCNVisitingComposer(CocoaMenuComposingVisitor::getNewInstance(view),
                                                                   CocoaMenuDecomposingVisitor::getNewInstance(view));
