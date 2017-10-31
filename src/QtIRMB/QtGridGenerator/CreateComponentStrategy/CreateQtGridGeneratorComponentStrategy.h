@@ -1,7 +1,7 @@
 #ifndef QTIRMB_CREATEQTGRIDGENERATORSTRATEGY_H
 #define QTIRMB_CREATEQTGRIDGENERATORSTRATEGY_H
 
-#include <CrossNative/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
+#include <CrossViews/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
 
 class GridGenerator;
 class CNComposer;

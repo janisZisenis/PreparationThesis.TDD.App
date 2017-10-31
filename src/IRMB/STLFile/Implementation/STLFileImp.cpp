@@ -1,6 +1,6 @@
 #include "STLFileImp.h"
 #include "IRMB/STLFile/STLFileVisitor.h"
-#include <CrossNative/CNAcceptor/CNAcceptorImp.h>
+#include <Hierarchies/CNAcceptor/CNAcceptorImp.h>
 
 #include <boost/filesystem.hpp>
 #include "GridGenerator/utilities/io/STLReaderWriter.h"

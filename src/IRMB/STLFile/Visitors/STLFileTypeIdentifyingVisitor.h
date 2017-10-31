@@ -1,7 +1,7 @@
 #ifndef IRMB_STLFILETYPEIDENTIFYINGVISITOR_H
 #define IRMB_STLFILETYPEIDENTIFYINGVISITOR_H
 
-#include <CrossNative/CNMatcher/CNVisitingMatcher/CNIdentifyingVisitor.h>
+#include <Hierarchies/CNMatcher/CNVisitingMatcher/CNIdentifyingVisitor.h>
 #include "IRMB/STLFile/STLFileVisitor.h"
 
 class STLFileTypeIdentifyingVisitor;

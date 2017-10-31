@@ -1,11 +1,11 @@
 #include "QtIRMBMenuEntryListProvider.h"
 #include "QtViews/QActionBased/QtAction/QtAction.h"
-#include "CrossViews/MenuEntryPresenter/MenuEntryPresenter.h"
-#include "CodeBaseImp/CBActionAppearance/CBFixedActionAppearance/CBFixedAppearance.h"
-#include <CrossNative/TransActions/CNLoadAction/CNLoadAction.h>
-#include <CrossNative/CNComponent/CNComponent.h>
-#include <CrossViews/HierarchicModel/API/HierarchicModelAccess.h>
-#include <CrossViews/SelectionModel/SelectionModel.h>
+#include <CrossViews/CNMenuEntryPresenter/CNMenuEntryPresenter.h>
+#include <Base/TransActionAppearances/CNFixedActionAppearance/CNFixedAppearance.h>
+#include <CrossViews/TransActions/CNLoadAction/CNLoadAction.h>
+#include <Hierarchies/CNComponent/CNComponent.h>
+#include <CrossViews/CNHierarchicModel/API/CNHierarchicComponentAccess.h>
+#include <CrossViews/CNSelectionModel/CNSelectionModel.h>
 #include <IRMB/GridGenerator/GridGeneratorVisitor.h>
 #include <IRMB/STLFile/STLFileVisitor.h>
 #include "QtIRMB/QtGridGenerator/CreateComponentStrategy/CreateQtGridGeneratorComponentStrategy.h"
@@ -33,22 +33,22 @@ public:
 
     void visit(std::shared_ptr<GridGenerator> gridGenerator) override {
         QtActionPtr view = QtAction::getNewInstance();
-        CBFixedAppearancePtr appearance = CBFixedAppearance::getNewInstance(true, OFF, "Generate Grid");
-        CBTransActionPtr action = CNLoadAction::getNewInstance(componentLoader,
+        CNFixedAppearancePtr appearance = CNFixedAppearance::getNewInstance(true, OFF, "Generate Grid");
+        CNTransActionPtr action = CNLoadAction::getNewInstance(componentLoader,
                                                                CreateQtGridGeneratorComponentStrategy::getNewInstance(gridGenerator),
                                                                matcher);
-        MenuEntryPresenterPtr presenter = MenuEntryPresenter::getNewInstance(view, appearance, action);
+        CNMenuEntryPresenterPtr presenter = CNMenuEntryPresenter::getNewInstance(view, appearance, action);
         view->setListener(presenter);
         menuEntries.push_back(presenter);
     }
 
     void visit(std::shared_ptr<STLFile> stlFile) override {
         QtActionPtr view = QtAction::getNewInstance();
-        CBFixedAppearancePtr appearance = CBFixedAppearance::getNewInstance(true, OFF, "Show Geometry");
-        CBTransActionPtr action = CNLoadAction::getNewInstance(componentLoader,
+        CNFixedAppearancePtr appearance = CNFixedAppearance::getNewInstance(true, OFF, "Show Geometry");
+        CNTransActionPtr action = CNLoadAction::getNewInstance(componentLoader,
                                                                CreateQtSTLFileComponentStrategy::getNewInstance(stlFile),
                                                                matcher);
-        MenuEntryPresenterPtr presenter = MenuEntryPresenter::getNewInstance(view, appearance, action);
+        CNMenuEntryPresenterPtr presenter = CNMenuEntryPresenter::getNewInstance(view, appearance, action);
         view->setListener(presenter);
         menuEntries.push_back(presenter);
     }
@@ -61,15 +61,15 @@ private:
 
 QtIRMBMenuEntryListProviderPtr QtIRMBMenuEntryListProvider::getNewInstance(std::shared_ptr<CNComponentLoader> componentLoader,
                                                                            std::shared_ptr<CNMatcher> matcher,
-                                                                           std::shared_ptr<SelectionModel> selectionModel,
-                                                                           std::shared_ptr<HierarchicModelAccess> modelAccess) {
+                                                                           std::shared_ptr<CNSelectionModel> selectionModel,
+                                                                           std::shared_ptr<CNHierarchicComponentAccess> modelAccess) {
     return QtIRMBMenuEntryListProviderPtr(new QtIRMBMenuEntryListProvider(componentLoader, matcher, selectionModel, modelAccess));
 }
 QtIRMBMenuEntryListProvider::~QtIRMBMenuEntryListProvider() {}
 QtIRMBMenuEntryListProvider::QtIRMBMenuEntryListProvider(std::shared_ptr<CNComponentLoader> componentLoader,
                                                          std::shared_ptr<CNMatcher> matcher,
-                                                         std::shared_ptr<SelectionModel> selectionModel,
-                                                         std::shared_ptr<HierarchicModelAccess> modelAccess)
+                                                         std::shared_ptr<CNSelectionModel> selectionModel,
+                                                         std::shared_ptr<CNHierarchicComponentAccess> modelAccess)
         : componentLoader(componentLoader), matcher(matcher), selectionModel(selectionModel), modelAccess(modelAccess) {}
 
 const std::vector<CNVisitablePtr> QtIRMBMenuEntryListProvider::getMenuEntryList() {

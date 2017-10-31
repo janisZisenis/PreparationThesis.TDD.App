@@ -1,7 +1,7 @@
 #ifndef COCOAIRMB_CREATECOCOASTLFILESTRATEGY_H
 #define COCOAIRMB_CREATECOCOASTLFILESTRATEGY_H
 
-#include <CrossNative/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
+#include <CrossViews/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
 
 class STLFile;
 class CNComposer;

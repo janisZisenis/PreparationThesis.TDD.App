@@ -1,6 +1,6 @@
 #include "IRMBMatcherFactory.h"
-#include <CrossNative/CNMatcherFactory/CNMatcherFactory.h>
-#include <CrossNative/CNMatcher/CNMatcher.h>
+#include <Hierarchies/CNMatcherFactory/CNMatcherFactory.h>
+#include <Hierarchies/CNMatcher/CNMatcher.h>
 
 #include <IRMB/STLFile/Visitors/STLFileTypeIdentifyingVisitor.h>
 #include <IRMB/GridGenerator/Visitors/GridGeneratorTypeIdentifyingVisitor.h>

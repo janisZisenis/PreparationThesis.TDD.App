@@ -1,7 +1,7 @@
 #ifndef IRMB_STLFILE_H
 #define IRMB_STLFILE_H
 
-#include <CrossNative/CNVisitable/CNVisitable.h>
+#include <Hierarchies/CNVisitable/CNVisitable.h>
 #include <vector>
 #include "GridGenerator/stl/Triangle.h"
 #include "GridGenerator/stl/BoundingBox.h"

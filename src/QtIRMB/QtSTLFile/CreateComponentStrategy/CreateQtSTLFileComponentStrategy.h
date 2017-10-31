@@ -1,7 +1,7 @@
 #ifndef QTIRMB_CREATEQTSTLFILESTRATEGY_H
 #define QTIRMB_CREATEQTSTLFILESTRATEGY_H
 
-#include <CrossNative/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
+#include <CrossViews/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
 
 class STLFile;
 class CNComposer;

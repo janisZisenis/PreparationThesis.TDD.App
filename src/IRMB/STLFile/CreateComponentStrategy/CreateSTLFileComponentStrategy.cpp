@@ -1,7 +1,7 @@
 #include "CreateSTLFileComponentStrategy.h"
 #include "IRMB/STLFile/Implementation/STLFileImp.h"
-#include <CrossNative/CNComponent/CNComposable/CNComposable.h>
-#include <CrossNative/CNComposer/CNNullComposer.h>
+#include <Hierarchies/CNComponent/CNComposable/CNComposable.h>
+#include <Hierarchies/CNComposer/CNNullComposer.h>
 #include "FileFinder.h"
 
 CreateSTLFileComponentStrategyPtr CreateSTLFileComponentStrategy::getNewInstance(FileFinderPtr fileFinder) {
@@ -12,7 +12,7 @@ CreateSTLFileComponentStrategy::CreateSTLFileComponentStrategy(FileFinderPtr fil
 
 CNComponentPtr CreateSTLFileComponentStrategy::createComponent() {
     if(!fileFinder->findFile())
-        throw CNCreationCanceledException();
+        throw CreationCanceledException();
 
     STLFilePtr stlFile = STLFileImp::getNewInstance(fileFinder->getFileName());
     CNComposerPtr composer = CNNullComposer::getNewInstance();

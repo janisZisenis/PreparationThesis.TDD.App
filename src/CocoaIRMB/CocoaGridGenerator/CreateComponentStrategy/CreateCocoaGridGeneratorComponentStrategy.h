@@ -1,7 +1,7 @@
 #ifndef COCOAIRMB_CREATECOCOAGRIDGENERATORSTRATEGY_H
 #define COCOAIRMB_CREATECOCOAGRIDGENERATORSTRATEGY_H
 
-#include <CrossNative/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
+#include <CrossViews/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
 
 class GridGenerator;
 class CNComposer;

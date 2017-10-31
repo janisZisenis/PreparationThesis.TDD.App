@@ -1,7 +1,7 @@
 #ifndef IRMB_GRIDGENERATORTYPEIDENTIFYINGVISITOR_H
 #define IRMB_GRIDGENERATORTYPEIDENTIFYINGVISITOR_H
 
-#include <CrossNative/CNMatcher/CNVisitingMatcher/CNIdentifyingVisitor.h>
+#include <Hierarchies/CNMatcher/CNVisitingMatcher/CNIdentifyingVisitor.h>
 #include "IRMB/GridGenerator/GridGeneratorVisitor.h"
 
 class GridGeneratorTypeIdentifyingVisitor;

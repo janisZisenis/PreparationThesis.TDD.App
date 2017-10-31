@@ -3,12 +3,12 @@
 
 #include <CocoaViews/CocoaViewComponentFactory/CocoaViewComponentFactory.h>
 
-class CBCommandInvoker;
-class AddingHierarchicModel;
-class SelectionModel;
+class CNCommandInvoker;
+class CNComponentAdder;
+class CNSelectionModel;
 class CNMatcher;
 class FileFinder;
-class MenuEntryListProvider;
+class CNComponentListProvider;
 
 class CocoaIRMBViewComponentFactory;
 typedef std::shared_ptr<CocoaIRMBViewComponentFactory> CocoaIRMBViewComponentFactoryPtr;
@@ -21,17 +21,17 @@ private:
     CocoaIRMBViewComponentFactory();
 
 public:
-    virtual std::shared_ptr<CNComponent> makeEvaluateMenuComponent(std::string title, std::string tag, std::shared_ptr<SelectionModel> selectionModel,
-                                                                   std::shared_ptr<MenuEntryListProvider> menuEntryListProvider);
+    virtual std::shared_ptr<CNComponent> makeEvaluateMenuComponent(std::string title, std::string tag, std::shared_ptr<CNSelectionModel> selectionModel,
+                                                                   std::shared_ptr<CNComponentListProvider> menuEntryListProvider);
 
-    virtual std::shared_ptr<CNComponent> makeAddSTLFileActionComponent(std::shared_ptr<CBCommandInvoker> invoker,
-                                                                       std::shared_ptr<AddingHierarchicModel> model,
-                                                                       std::shared_ptr<SelectionModel> selectionModel,
+    virtual std::shared_ptr<CNComponent> makeAddSTLFileActionComponent(std::shared_ptr<CNCommandInvoker> invoker,
+                                                                       std::shared_ptr<CNComponentAdder> model,
+                                                                       std::shared_ptr<CNSelectionModel> selectionModel,
                                                                        std::shared_ptr<CNMatcher> matcher);
 
-    virtual std::shared_ptr<CNComponent> makeGridGeneratorActionComponent(std::shared_ptr<CBCommandInvoker> invoker,
-                                                                          std::shared_ptr<AddingHierarchicModel> model,
-                                                                          std::shared_ptr<SelectionModel> selectionModel,
+    virtual std::shared_ptr<CNComponent> makeGridGeneratorActionComponent(std::shared_ptr<CNCommandInvoker> invoker,
+                                                                          std::shared_ptr<CNComponentAdder> model,
+                                                                          std::shared_ptr<CNSelectionModel> selectionModel,
                                                                           std::shared_ptr<CNMatcher> matcher);
 };
 

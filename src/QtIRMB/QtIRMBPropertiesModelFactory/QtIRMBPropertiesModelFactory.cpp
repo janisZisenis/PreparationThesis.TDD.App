@@ -1,7 +1,7 @@
 #include "QtIRMBPropertiesModelFactory.h"
 #include <QtViews/QWidgetBased/QtPropertiesExplorer/QtPropertiesItem.h>
 #include <QtViews/QWidgetBased/QtPropertiesExplorer/QtPropertiesModel.h>
-#include <CrossNative/CNVisitor/CNVisitor.h>
+#include <Hierarchies/CNVisitor/CNVisitor.h>
 #include <IRMB/STLFile/STLFileVisitor.h>
 #include <IRMB/STLFile/STLFile.h>
 #include <IRMB/GridGenerator/GridGenerator.h>

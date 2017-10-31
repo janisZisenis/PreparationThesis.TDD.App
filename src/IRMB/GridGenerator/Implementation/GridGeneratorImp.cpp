@@ -1,6 +1,6 @@
 #include "GridGeneratorImp.h"
 #include "IRMB/GridGenerator/GridGeneratorVisitor.h"
-#include <CrossNative/CNAcceptor/CNAcceptorImp.h>
+#include <Hierarchies/CNAcceptor/CNAcceptorImp.h>
 #include "GridGenerator/grid/kernel/GridKernelCPU.h"
 #include "GridGenerator/utilities/Transformator.h"
 #include "GridGenerator/utilities/io/STLReaderWriter.h"

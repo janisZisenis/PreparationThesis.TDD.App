@@ -1,7 +1,7 @@
 #ifndef IRMB_CREATEGRIDGENERATORSTRATEGY_H
 #define IRMB_CREATEGRIDGENERATORSTRATEGY_H
 
-#include <CrossNative/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
+#include <CrossViews/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
 
 class GridGenerator;
 class CNComposer;

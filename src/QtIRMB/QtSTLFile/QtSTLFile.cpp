@@ -1,5 +1,5 @@
 #include "QtSTLFile.h"
-#include <CrossNative/CNAcceptor/CNAcceptorImp.h>
+#include <Hierarchies/CNAcceptor/CNAcceptorImp.h>
 #include <QtViews/QWidgetBased/QtCentral/QtCentralVisitor.h>
 #include <IRMB/STLFile/STLFile.h>
 #include <QWidget>

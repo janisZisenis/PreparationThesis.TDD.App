@@ -1,6 +1,6 @@
 #include "QtGridGenerator.h"
-#include <CrossNative/CNAcceptor/CNAcceptorImp.h>
-#include <CrossNative/CNVisitor/CNVisitor.h>
+#include <Hierarchies/CNAcceptor/CNAcceptorImp.h>
+#include <Hierarchies/CNVisitor/CNVisitor.h>
 #include <QtViews/QWidgetBased/QtCentral/QtCentralVisitor.h>
 
 #include <IRMB/GridGenerator/GridGenerator.h>

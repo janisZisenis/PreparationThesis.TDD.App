@@ -1,7 +1,7 @@
 #ifndef IRMB_GRIDGENERATOR_H
 #define IRMB_GRIDGENERATOR_H
 
-#include <CrossNative/CNVisitable/CNVisitable.h>
+#include <Hierarchies/CNVisitable/CNVisitable.h>
 #include <string>
 
 class STLFile;

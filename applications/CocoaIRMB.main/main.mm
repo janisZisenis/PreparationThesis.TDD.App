@@ -1,12 +1,12 @@
 #include <AppKit/AppKit.h>
 
-#include <CodeBaseImp/CBCommandStack/CBCommandStack.h>
+#include <Base/CNCommandStack/CNCommandStack.h>
 
-#include <CrossNative/CNComponent/CNComponent.h>
-#include <CrossNative/CNDynamicHierarchy/CNDynamicHierarchy.h>
+#include <Hierarchies/CNComponent/CNComponent.h>
+#include <Hierarchies/CNDynamicHierarchy/CNDynamicHierarchy.h>
 
-#include <CrossViews/SelectionModel/SelectionModelImp.h>
-#include <CrossViews/HierarchicModel/HierarchicModel.h>
+#include <CrossViews/CNSelectionModel/CNSelectionModelImp.h>
+#include <CrossViews/CNHierarchicModel/CNHierarchicModel.h>
 
 #include <CocoaViews/CocoaViewMatcherFactory/CocoaViewMatcherFactory.h>
 
@@ -18,9 +18,9 @@
 #include <CocoaIRMB/CocoaIRMBMenuEntryListProvider/CocoaIRMBMenuEntryListProvider.h>
 
 int main(int argc, char** argv) {
-    SelectionModelImpPtr selectionModel = SelectionModelImp::getNewInstance();
-    HierarchicModelPtr model = HierarchicModel::getNewInstance();
-    CBCommandStackPtr commandStack = CBCommandStack::getNewInstance();
+    CNSelectionModelImpPtr selectionModel = CNSelectionModelImp::getNewInstance();
+    CNHierarchicModelPtr model = CNHierarchicModel::getNewInstance();
+    CNCommandStackPtr commandStack = CNCommandStack::getNewInstance();
     IRMBMatcherFactoryPtr irmbMatcherFactory = IRMBMatcherFactory::getNewInstance();
 
     NSApplication* application = [NSApplication sharedApplication];

@@ -1,7 +1,7 @@
 #ifndef IRMB_CREATESTLFILECOMPONENTSTRATEGY_H
 #define IRMB_CREATESTLFILECOMPONENTSTRATEGY_H
 
-#include <CrossNative/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
+#include <CrossViews/TransActions/CNLoadAction/CNCreateComponentStrategy.h>
 
 class FileFinder;
 class STLFileComponent;

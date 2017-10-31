@@ -1,5 +1,5 @@
 #include "CocoaSTLFile.h"
-#include <CrossNative/CNAcceptor/CNAcceptorImp.h>
+#include <Hierarchies/CNAcceptor/CNAcceptorImp.h>
 #include <CocoaViews/NSViewBased/CocoaCentral/CocoaCentralVisitor.h>
 #include <IRMB/STLFile/Implementation/STLFileImp.h>
 #import <Cocoa/Cocoa.h>

@@ -1,5 +1,5 @@
 #include "CocoaGridGenerator.h"
-#include <CrossNative/CNAcceptor/CNAcceptorImp.h>
+#include <Hierarchies/CNAcceptor/CNAcceptorImp.h>
 #include <CocoaViews/NSViewBased/CocoaCentral/CocoaCentralVisitor.h>
 #include <IRMB/GridGenerator/GridGenerator.h>
 #import <Cocoa/Cocoa.h>

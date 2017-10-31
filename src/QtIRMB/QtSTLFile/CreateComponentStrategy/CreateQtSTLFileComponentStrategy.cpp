@@ -1,6 +1,6 @@
 #include "CreateQtSTLFileComponentStrategy.h"
-#include <CrossNative/CNComponent/CNComposable/CNComposable.h>
-#include <CrossNative/CNComposer/CNNullComposer.h>
+#include <Hierarchies/CNComponent/CNComposable/CNComposable.h>
+#include <Hierarchies/CNComposer/CNNullComposer.h>
 #include "QtIRMB/QtSTLFile/QtSTLFile.h"
 
 CreateQtSTLFileComponentStrategyPtr CreateQtSTLFileComponentStrategy::getNewInstance(std::shared_ptr<STLFile> stlFile) {

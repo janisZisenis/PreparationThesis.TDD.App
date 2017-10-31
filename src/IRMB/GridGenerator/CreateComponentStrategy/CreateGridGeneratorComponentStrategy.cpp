@@ -2,8 +2,8 @@
 #include "IRMB/GridGenerator/Implementation/GridGeneratorImp.h"
 #include "IRMB/GridGenerator/Visitors/GridGeneratorComposingVisitor.h"
 #include "IRMB/GridGenerator/Visitors/GridGeneratorDecomposingVisitor.h"
-#include <CrossNative/CNComponent/CNComposable/CNComposable.h>
-#include <CrossNative/CNComposer/CNVisitingComposer/CNVisitingComposer.h>
+#include <Hierarchies/CNComponent/CNComposable/CNComposable.h>
+#include <Hierarchies/CNComposer/CNVisitingComposer/CNVisitingComposer.h>
 
 CreateGridGeneratorComponentStrategyPtr CreateGridGeneratorComponentStrategy::getNewInstance() {
     return CreateGridGeneratorComponentStrategyPtr(new CreateGridGeneratorComponentStrategy());

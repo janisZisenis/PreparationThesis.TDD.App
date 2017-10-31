@@ -1,6 +1,6 @@
 #include "CocoaIRMBSolutionItemFactory.h"
 
-#include <CrossNative/CNVisitor/CNVisitor.h>
+#include <Hierarchies/CNVisitor/CNVisitor.h>
 #include <CocoaViews/NSViewBased/CocoaSolutionExplorer/CocoaSolutionItem.h>
 #include <IRMB/STLFile/STLFileVisitor.h>
 #include <IRMB/STLFile/STLFile.h>
