@@ -28,7 +28,6 @@ public:
 
 private:
     STLFileImpPtr me();
-
 private:
     std::shared_ptr<CNAcceptor> acceptor;
 

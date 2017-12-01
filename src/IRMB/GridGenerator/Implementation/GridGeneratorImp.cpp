@@ -6,7 +6,7 @@
 #include "GridGenerator/utilities/io/STLReaderWriter.h"
 #include "GridGenerator/stl/Triangle.h"
 #include "IRMB/STLFile/STLFile.h"
-
+#include <iostream>
 
 GridGeneratorImpPtr GridGeneratorImp::getNewInstance(std::string name, double length, double width, double height, double delta, std::string distribution) {
     return GridGeneratorImpPtr(new GridGeneratorImp(name, length, width, height, delta, distribution));
@@ -39,12 +39,36 @@ double GridGeneratorImp::getDelta() { return delta; }
 std::string GridGeneratorImp::getDistribution() { return distribution; }
 Grid* GridGeneratorImp::generateGrid() {
 
-    int nx = (int)(length / delta);
-    int ny = (int)(width / delta);
-    int nz = (int)(height / delta);
-    BoundingBox b(0, nx, 0, ny, 0, nz);
-    Transformator trans;
+    BoundingBox b(0, 0, 0, 0, 0, 0);
 
+    if(stlFiles.size() > 0) {
+        b.minX = stlFiles[0]->getBoundingBox().minX;
+        b.minY = stlFiles[0]->getBoundingBox().minY;
+        b.minZ = stlFiles[0]->getBoundingBox().minZ;
+        b.maxX = stlFiles[0]->getBoundingBox().maxX;
+        b.maxY = stlFiles[0]->getBoundingBox().maxY;
+        b.maxZ = stlFiles[0]->getBoundingBox().maxZ;
+    }
+
+    for(int i = 1; i < stlFiles.size(); i++) {
+        BoundingBox localB = stlFiles[i]->getBoundingBox();
+        if(localB.minX < b.minX) b.minX = localB.minX;
+        if(localB.minY < b.minY) b.minY = localB.minY;
+        if(localB.minZ < b.minZ) b.minY = localB.minZ;
+
+        if(localB.maxX > b.maxX) b.maxX = localB.maxX;
+        if(localB.maxY > b.maxY) b.maxY = localB.maxY;
+        if(localB.maxZ > b.maxZ) b.maxZ = localB.maxZ;
+    }
+
+    int margin = 5;
+    b = BoundingBox(b.minX - margin, b.maxX + margin, b.minY - margin, b.maxY + margin, b.minZ - margin, b.maxZ + margin);
+
+    length = b.maxX - b.minX;
+    width = b.maxY - b.minY;
+    height = b.maxZ - b.minZ;
+
+    Transformator trans;
     gridKernel = std::make_shared<GridKernelCPU>(b, trans, distribution, false);
 
     for(int i = 0; i < stlFiles.size(); i++)

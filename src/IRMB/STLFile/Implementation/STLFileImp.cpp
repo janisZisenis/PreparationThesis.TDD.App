@@ -23,6 +23,15 @@ STLFileImp::STLFileImp(std::string path)
     Transformator trans;
     triangles = STLReaderWriter::readSTL(getPath(), trans);
 
+    if(getNumberOfTriangles() > 0) {
+        boundingBox.minX = (int)triangles[0].v1.x;
+        boundingBox.minY = (int)triangles[0].v1.y;
+        boundingBox.minZ = (int)triangles[0].v1.z;
+        boundingBox.maxX = (int)triangles[0].v1.x;
+        boundingBox.maxY = (int)triangles[0].v1.y;
+        boundingBox.maxZ = (int)triangles[0].v1.z;
+    }
+
     for(int i = 0; i < getNumberOfTriangles(); i++) {
         Triangle t = triangles[i];
         if(t.v1.x < boundingBox.minX) boundingBox.minX = (int)t.v1.x;

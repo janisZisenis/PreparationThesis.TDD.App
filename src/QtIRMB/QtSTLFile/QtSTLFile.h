@@ -2,10 +2,13 @@
 #define QTIRMB_QTSTLFILE_H
 
 #include <QtViews/QWidgetBased/QtCentral/QtCentral.h>
+#include <vtkSmartPointer.h>
 
 class CNAcceptor;
 
 class QVTKWidget;
+class vtkSTLReader;
+
 class STLFile;
 
 class QtSTLFile;
@@ -24,11 +27,14 @@ public:
 
     virtual void accept(CNVisitorPtr visitor) override;
 private:
+    void initialize();
+    virtual void visualize();
     QtSTLFilePtr me();
 
 private:
     std::shared_ptr<CNAcceptor> acceptor;
 
+    std::shared_ptr<vtkSTLReader> reader;
     std::shared_ptr<STLFile> stlFile;
     QVTKWidget* widget;
 };

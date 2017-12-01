@@ -6,6 +6,8 @@ set(includeDirectories ${CMAKE_SOURCE_DIR}/src)
 #glob files and save in MY_SRCS
 include(CMakePackage.cmake)
 
+set(CMAKE_AUTOMOC ON)
+
 buildLib(${targetName} "${MY_SRCS}" "${linkDirectories}" "${libsToLink}" "${includeDirectories}")
 generateExportHeader(${targetName} ${CMAKE_SOURCE_DIR}/src/${targetName})
 

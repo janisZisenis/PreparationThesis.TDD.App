@@ -15,7 +15,7 @@ QtFileFinder::QtFileFinder() {
 
 bool QtFileFinder::findFile() {
     bool success = false;
-    QString file = QFileDialog::getOpenFileName(nullptr, "Select STL File", "/Users/Janis/Studienarbeit-Framework/STL", "STL Files (*.stl)");
+    QString file = QFileDialog::getOpenFileName(nullptr, "Select STL File", "/Users/Janis/STLFiles", "STL Files (*.stl)");
 
 
     if(!file.isEmpty() && !file.isNull()) {
