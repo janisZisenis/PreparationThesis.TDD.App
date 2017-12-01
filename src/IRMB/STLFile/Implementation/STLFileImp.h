@@ -27,6 +27,8 @@ public:
     virtual BoundingBox getBoundingBox() override;
 
 private:
+    virtual void initializeBoundingBox();
+
     STLFileImpPtr me();
 private:
     std::shared_ptr<CNAcceptor> acceptor;

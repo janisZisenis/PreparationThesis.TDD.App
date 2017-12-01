@@ -25,6 +25,7 @@ public:
     void visit(STLFilePtr stlFile) override {
         propertiesModel->addItem(QtPropertiesItem::getNewInstance("Name", stlFile->getName()));
         propertiesModel->addItem(QtPropertiesItem::getNewInstance("Path", stlFile->getPath()));
+        propertiesModel->addItem(QtPropertiesItem::getNewInstance("NoTriangles", std::to_string(stlFile->getNumberOfTriangles())));
     }
     void visit(GridGeneratorPtr gridGenerator) override {
         propertiesModel->addItem(QtPropertiesItem::getNewInstance("Name", gridGenerator->getName()));

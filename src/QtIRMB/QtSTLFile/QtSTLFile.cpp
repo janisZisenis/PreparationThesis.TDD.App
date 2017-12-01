@@ -66,12 +66,9 @@ void QtSTLFile::visualize() {
     renderer->AddActor(actor);
 
     widget->GetRenderWindow()->AddRenderer(renderer);
-
-    vtkSmartPointer<vtkSTLWriter> writer = vtkSmartPointer<vtkSTLWriter>::New();
-    writer->SetFileTypeToBinary();
-
-
-    writer->SetInputData(reader->GetOutput());
-    writer->SetFileName("/Users/Janis/STLFiles/binaryOutput.stl");
-    writer->Write();
+//    vtkSmartPointer<vtkSTLWriter> writer = vtkSmartPointer<vtkSTLWriter>::New();
+//    writer->SetFileTypeToBinary();
+//    writer->SetInputData(reader->GetOutput());
+//    writer->SetFileName("/Users/Janis/STLFiles/binaryOutput.stl");
+//    writer->Write();
 }

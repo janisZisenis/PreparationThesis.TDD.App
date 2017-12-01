@@ -42,23 +42,25 @@ Grid* GridGeneratorImp::generateGrid() {
     BoundingBox b(0, 0, 0, 0, 0, 0);
 
     if(stlFiles.size() > 0) {
-        b.minX = stlFiles[0]->getBoundingBox().minX;
-        b.minY = stlFiles[0]->getBoundingBox().minY;
-        b.minZ = stlFiles[0]->getBoundingBox().minZ;
-        b.maxX = stlFiles[0]->getBoundingBox().maxX;
-        b.maxY = stlFiles[0]->getBoundingBox().maxY;
-        b.maxZ = stlFiles[0]->getBoundingBox().maxZ;
+        BoundingBox localB = stlFiles[0]->getBoundingBox();
+        b.minX = localB.minX;
+        b.minY = localB.minY;
+        b.minZ = localB.minZ;
+
+        b.maxX = localB.maxX;
+        b.maxY = localB.maxY;
+        b.maxZ = localB.maxZ;
     }
 
     for(int i = 1; i < stlFiles.size(); i++) {
         BoundingBox localB = stlFiles[i]->getBoundingBox();
-        if(localB.minX < b.minX) b.minX = localB.minX;
-        if(localB.minY < b.minY) b.minY = localB.minY;
-        if(localB.minZ < b.minZ) b.minY = localB.minZ;
+        b.minX = std::min(b.minX,localB.minX);
+        b.minY = std::min(b.minY, localB.minY);
+        b.minZ = std::min(b.minZ, localB.minZ);
 
-        if(localB.maxX > b.maxX) b.maxX = localB.maxX;
-        if(localB.maxY > b.maxY) b.maxY = localB.maxY;
-        if(localB.maxZ > b.maxZ) b.maxZ = localB.maxZ;
+        b.maxX = std::max(b.maxX,localB.maxX);
+        b.maxY = std::max(b.maxY, localB.maxY);
+        b.maxZ = std::max(b.maxZ, localB.maxZ);
     }
 
     int margin = 5;

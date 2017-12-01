@@ -13,7 +13,6 @@
 #include <vtkActor.h>
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
-#include <vtkSmartPointer.h>
 #include <vtkPoints.h>
 #include <vtkPointData.h>
 #include <vtkVertex.h>
@@ -22,8 +21,11 @@
 #include <vtkProperty.h>
 #include <vtkPolyData.h>
 #include <vtkThresholdPoints.h>
+#include <vtkCamera.h>
+
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+
 
 QtGridGeneratorPtr QtGridGenerator::getNewInstance(GridGeneratorPtr gridGenerator) {
     return QtGridGeneratorPtr(new QtGridGenerator(gridGenerator));
@@ -62,15 +64,19 @@ void QtGridGenerator::accept(CNVisitorPtr visitor) {
 }
 
 void QtGridGenerator::update() {
-    grid = gridGenerator->generateGrid();
+    initializePoints();
     visualize();
+ }
+
+void QtGridGenerator::initializePoints() {
+    grid = gridGenerator->generateGrid();
+    readPoints();
 }
 
 void QtGridGenerator::visualize() {
     thresholdGrid();
     visualizeGrid();
-
-    widget->repaint();
+    widget->update();
 }
 
 void QtGridGenerator::visualizeGrid() {
@@ -81,7 +87,7 @@ void QtGridGenerator::visualizeGrid() {
     actor->SetMapper(mapper);
     actor->GetProperty()->SetPointSize(3);
 
-    vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
+    renderer = vtkSmartPointer<vtkRenderer>::New();
     renderer->AddActor(actor);
     renderer->SetBackground(222./255, 222./255, 222./255);
 
@@ -89,37 +95,40 @@ void QtGridGenerator::visualizeGrid() {
 }
 
 void QtGridGenerator::thresholdGrid() {
-    vtkSmartPointer<vtkPoints> thresholdedPoints = getThresholdedPoints();
+    vtkSmartPointer<vtkPolyData> thresholdedPolydata = getThresholdedPoints();
+    vtkSmartPointer<vtkPoints> thresholdedPoints = thresholdedPolydata->GetPoints();
+    vtkSmartPointer<vtkDataArray> types = thresholdedPolydata->GetPointData()->GetArray("type");
 
     thresholdedGrid = vtkSmartPointer<vtkUnstructuredGrid>::New();
-    vtkSmartPointer<vtkDoubleArray> types = vtkSmartPointer<vtkDoubleArray>::New();
 
     for(int i = 0; i < thresholdedPoints->GetNumberOfPoints(); i++) {
         thresholdedGrid->SetPoints(thresholdedPoints);
+        thresholdedGrid->GetPointData()->SetScalars(types);
         vtkSmartPointer<vtkVertex> vertex = vtkSmartPointer<vtkVertex>::New();
         vertex->GetPointIds()->SetId(0, i);
         thresholdedGrid->InsertNextCell(vertex->GetCellType(), vertex->GetPointIds());
-
-        types->InsertNextValue((int)grid->field[i]);
     }
 }
 
-vtkSmartPointer<vtkPoints> QtGridGenerator::getThresholdedPoints() {
-    vtkSmartPointer<vtkPoints> points = vtkSmartPointer<vtkPoints>::New();
-    vtkSmartPointer<vtkIntArray> type = vtkSmartPointer<vtkIntArray>::New();
-    type->SetNumberOfComponents(1);
-    type->SetName("type");
+void QtGridGenerator::readPoints() {
+    points = vtkSmartPointer<vtkPoints>::New();
+    types = vtkSmartPointer<vtkDoubleArray>::New();
+    types->SetNumberOfComponents(1);
+    types->SetName("type");
 
     int x, y, z;
     for(int i = 0; i < grid->size; i++) {
         grid->transIndexToCoords(i, x, y, z);
         points->InsertNextPoint(x, y, z);
-        type->InsertNextValue(grid->field[i]);
+        types->InsertNextValue(grid->field[i]);
     }
+}
 
+
+vtkSmartPointer<vtkPolyData> QtGridGenerator::getThresholdedPoints() {
     vtkSmartPointer<vtkPolyData> polydata = vtkSmartPointer<vtkPolyData>::New();
     polydata->SetPoints(points);
-    polydata->GetPointData()->AddArray(type);
+    polydata->GetPointData()->AddArray(types);
 
     vtkSmartPointer<vtkThresholdPoints> threshold = vtkSmartPointer<vtkThresholdPoints>::New();
     threshold->SetInputData(polydata);
@@ -127,12 +136,12 @@ vtkSmartPointer<vtkPoints> QtGridGenerator::getThresholdedPoints() {
     int upper = getUpperThresholdBoundary();
     int lower = getLowerThresholdBoundary();
 
-    threshold->ThresholdBetween(getLowerThresholdBoundary(), getUpperThresholdBoundary());
+    threshold->ThresholdBetween(lower, upper);
     threshold->SetInputArrayToProcess(0, 0, 0, vtkDataObject::FIELD_ASSOCIATION_POINTS, "type");
     threshold->Update();
 
     vtkPolyData* thresholdedPolydata = threshold->GetOutput();
-    return thresholdedPolydata->GetPoints();
+    return thresholdedPolydata;
 }
 
 QtGridGeneratorPtr QtGridGenerator::me() {
@@ -177,19 +186,18 @@ void QtGridGenerator::onFluidButtonToggled() {
 
 int QtGridGenerator::getUpperThresholdBoundary() {
     if(showSolidNodes)
-        return 2;
-    if(showFluidNodes)
         return 1;
+    if(showFluidNodes)
+        return 0;
 
-    return 0;
+    return -1;
 }
 
 int QtGridGenerator::getLowerThresholdBoundary() {
     if(showFluidNodes)
-        return -1;
-    if(showFluidNodes)
         return 0;
+    if(showSolidNodes)
+        return 1;
 
-    return 1;
+    return 2;
 }
-

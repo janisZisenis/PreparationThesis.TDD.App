@@ -8,7 +8,10 @@
 class QPushButton;
 class QVTKWidget;
 class vtkUnstructuredGrid;
+class vtkPolyData;
 class vtkPoints;
+class vtkDoubleArray;
+class vtkRenderer;
 
 class CNAcceptor;
 
@@ -43,7 +46,8 @@ private:
     virtual void thresholdGrid();
     virtual int getUpperThresholdBoundary();
     virtual int getLowerThresholdBoundary();
-    virtual vtkSmartPointer<vtkPoints> getThresholdedPoints();
+    virtual void readPoints();
+    virtual vtkSmartPointer<vtkPolyData> getThresholdedPoints();
     virtual QtGridGeneratorPtr me();
 
 private:
@@ -55,13 +59,18 @@ private:
     QVTKWidget* widget;
     std::shared_ptr<GridGenerator> gridGenerator;
     Grid* grid;
+    vtkSmartPointer<vtkPoints> points;
+    vtkSmartPointer<vtkDoubleArray> types;
     vtkSmartPointer<vtkUnstructuredGrid> thresholdedGrid;
+    vtkSmartPointer<vtkRenderer> renderer;
 
     bool showSolidNodes = true;
     bool showFluidNodes = true;
 private slots:
     virtual void onSolidButtonToggled();
     virtual void onFluidButtonToggled();
+
+    void initializePoints();
 };
 
 #endif //QTIRMB_QTGRIDGENERATOR_H

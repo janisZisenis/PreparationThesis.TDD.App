@@ -18,46 +18,39 @@ STLFileImp::STLFileImp(std::string path)
     static int i;
 
     boost::filesystem::path p(path);
-    this->name = p.stem().string() + " (" + std::to_string(i++) +")";
+    this->name = p.stem().string() + " (" + std::to_string(i++) + ")";
 
     Transformator trans;
     triangles = STLReaderWriter::readSTL(getPath(), trans);
 
-    if(getNumberOfTriangles() > 0) {
-        boundingBox.minX = (int)triangles[0].v1.x;
-        boundingBox.minY = (int)triangles[0].v1.y;
-        boundingBox.minZ = (int)triangles[0].v1.z;
-        boundingBox.maxX = (int)triangles[0].v1.x;
-        boundingBox.maxY = (int)triangles[0].v1.y;
-        boundingBox.maxZ = (int)triangles[0].v1.z;
-    }
+    BoundingBox b;
+    initializeBoundingBox();
+}
 
-    for(int i = 0; i < getNumberOfTriangles(); i++) {
-        Triangle t = triangles[i];
-        if(t.v1.x < boundingBox.minX) boundingBox.minX = (int)t.v1.x;
-        if(t.v2.x < boundingBox.minX) boundingBox.minX = (int)t.v2.x;
-        if(t.v3.x < boundingBox.minX) boundingBox.minX = (int)t.v3.x;
+void STLFileImp::initializeBoundingBox() {
+    boundingBox.minX = (int)(*min_element(triangles.begin(), triangles.end(), [](const Triangle& t1, const Triangle& t2) {
+        return std::min(t1.v1.x, std::min(t1.v2.x, t1.v3.x)) < std::min(t2.v1.x, std::min(t2.v2.x, t2.v3.x));
+    })).v1.x;
 
-        if(t.v1.y < boundingBox.minY) boundingBox.minY = (int)t.v1.y;
-        if(t.v2.y < boundingBox.minY) boundingBox.minY = (int)t.v2.y;
-        if(t.v3.y < boundingBox.minY) boundingBox.minY = (int)t.v3.y;
+    boundingBox.minY = (int)(*min_element(triangles.begin(), triangles.end(), [](const Triangle& t1, const Triangle& t2) {
+        return std::min(t1.v1.y, std::min(t1.v2.y, t1.v3.y)) < std::min(t2.v1.y, std::min(t2.v2.y, t2.v3.y));
+    })).v1.y;
 
-        if(t.v1.z < boundingBox.minZ) boundingBox.minZ = (int)t.v1.z;
-        if(t.v2.z < boundingBox.minZ) boundingBox.minZ = (int)t.v2.z;
-        if(t.v3.z < boundingBox.minZ) boundingBox.minZ = (int)t.v3.z;
+    boundingBox.minZ = (int)(*min_element(triangles.begin(), triangles.end(), [](const Triangle& t1, const Triangle& t2) {
+        return std::min(t1.v1.z, std::min(t1.v2.z, t1.v3.z)) < std::min(t2.v1.z, std::min(t2.v2.z, t2.v3.z));
+    })).v1.z;
 
-        if(t.v1.x > boundingBox.maxX) boundingBox.maxX = (int)t.v1.x;
-        if(t.v2.x > boundingBox.maxX) boundingBox.maxX = (int)t.v2.x;
-        if(t.v3.x > boundingBox.maxX) boundingBox.maxX = (int)t.v3.x;
+    boundingBox.maxX = (int)(*max_element(triangles.begin(), triangles.end(), [](const Triangle& t1, const Triangle& t2) {
+        return std::max(t1.v1.x, std::max(t1.v2.x, t1.v3.x)) < std::max(t2.v1.x, std::max(t2.v2.x, t2.v3.x));
+    })).v1.x;
 
-        if(t.v1.y > boundingBox.maxY) boundingBox.maxY = (int)t.v1.y;
-        if(t.v2.y > boundingBox.maxY) boundingBox.maxY = (int)t.v2.y;
-        if(t.v3.y > boundingBox.maxY) boundingBox.maxY = (int)t.v3.y;
+    boundingBox.maxY = (int)(*max_element(triangles.begin(), triangles.end(), [](const Triangle& t1, const Triangle& t2) {
+        return std::max(t1.v1.y, std::max(t1.v2.y, t1.v3.y)) < std::max(t2.v1.y, std::max(t2.v2.y, t2.v3.y));
+    })).v1.y;
 
-        if(t.v1.z > boundingBox.maxZ) boundingBox.maxZ = (int)t.v1.z;
-        if(t.v2.z > boundingBox.maxZ) boundingBox.maxZ = (int)t.v2.z;
-        if(t.v3.z > boundingBox.maxZ) boundingBox.maxZ = (int)t.v3.z;
-    }
+    boundingBox.maxZ = (int)(*max_element(triangles.begin(), triangles.end(), [](const Triangle& t1, const Triangle& t2) {
+        return std::max(t1.v1.z, std::max(t1.v2.z, t1.v3.z)) < std::max(t2.v1.z, std::max(t2.v2.z, t2.v3.z));
+    })).v1.z;
 }
 
 std::string STLFileImp::getName() {
@@ -86,3 +79,5 @@ int STLFileImp::getNumberOfTriangles() {
 BoundingBox STLFileImp::getBoundingBox() {
     return boundingBox;
 }
+
+
